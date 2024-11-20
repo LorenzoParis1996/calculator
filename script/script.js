@@ -4,6 +4,7 @@ const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const equals = document.getElementById('equals');
 const clearInput = document.getElementById('clear');
+const showInput = document.getElementById('input');
 
 //values to be stored
 let numOne = null;
@@ -22,6 +23,8 @@ operators.forEach(ope => {
         if(output.textContent) {
             numOne = parseFloat(output.textContent);
             operator = ope.textContent;
+            //with this line of code we can still show the first number and operator entered in the input field.
+            showInput.textContent = `${numOne} ${operator}`;
             output.textContent = '';
         }
     });
@@ -53,6 +56,7 @@ equals.addEventListener('click', () => {
         
         //displays the result
         output.textContent = result;
+        showInput.textContent = '';
 
         //resets stored values
         numOne = null;
@@ -63,6 +67,7 @@ equals.addEventListener('click', () => {
 //clears output and stored values
 clearInput.addEventListener('click', () => {
     output.textContent = '';
+    showInput.textContent = '';
     numOne = null;
     operator = null;
 });
