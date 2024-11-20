@@ -5,6 +5,7 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.getElementById('equals');
 const clearInput = document.getElementById('clear');
 const showInput = document.getElementById('input');
+const squareRoot = document.getElementById('square-root');
 
 //values to be stored
 let numOne = null;
@@ -63,6 +64,15 @@ equals.addEventListener('click', () => {
         operator = null;
     }
 });
+
+squareRoot.addEventListener('click', () => {
+    if (output.textContent) {
+        const squareRootCalc = parseFloat(output.textContent);
+        result = Math.sqrt(squareRootCalc).toFixed(5);
+
+        output.textContent = result;
+    }
+})
 
 //clears output and stored values
 clearInput.addEventListener('click', () => {
