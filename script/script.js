@@ -6,6 +6,8 @@ const equals = document.getElementById('equals');
 const clearInput = document.getElementById('clear');
 const showInput = document.getElementById('input');
 const squareRoot = document.getElementById('square-root');
+const cubicRoot = document.getElementById('cubic-root');
+const percentage = document.getElementById('percentage');
 
 //values to be stored
 let numOne = null;
@@ -53,6 +55,9 @@ equals.addEventListener('click', () => {
             case '/':
                 result = numOne / numTwo;
                 break;
+            case '%':
+                result = (numTwo / 100) * numOne + numOne;
+                break;    
         }
         
         //displays the result
@@ -68,9 +73,29 @@ equals.addEventListener('click', () => {
 squareRoot.addEventListener('click', () => {
     if (output.textContent) {
         const squareRootCalc = parseFloat(output.textContent);
-        result = Math.sqrt(squareRootCalc).toFixed(5);
+        result = Math.sqrt(squareRootCalc).toFixed(5).replace(".00000", "");
 
         output.textContent = result;
+    }
+});
+
+cubicRoot.addEventListener('click', () => {
+    if (output.textContent) {
+        const cubicRootCalc = parseFloat(output.textContent);
+        result = Math.cbrt(cubicRootCalc).toFixed(5).replace(".00000", "");
+
+        output.textContent = result;
+    }
+});
+
+percentage.addEventListener('click', () => {
+    if(output.textContent) {
+        const percentCalc = parseFloat(output.textContent);
+        result = (percentCalc / 100) * numOne;
+
+        output.textContent = result.toFixed(2);
+        showInput.textContent = `${numOne} ${operator} ${percentCalc}%`;
+        numOne = null;
     }
 })
 
