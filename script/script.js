@@ -82,6 +82,7 @@ squareRoot.addEventListener('click', () => {
         result = Math.sqrt(squareRootCalc).toFixed(5).replace(".00000", "");
 
         output.textContent = result;
+        isResultDisplayed = true;
     }
 });
 
@@ -91,6 +92,7 @@ cubicRoot.addEventListener('click', () => {
         result = Math.cbrt(cubicRootCalc).toFixed(5).replace(".00000", "");
 
         output.textContent = result;
+        isResultDisplayed = true;
     }
 });
 
