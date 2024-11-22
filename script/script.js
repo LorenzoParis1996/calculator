@@ -12,9 +12,14 @@ const percentage = document.getElementById('percentage');
 //values to be stored
 let numOne = null;
 let operator = null;
+let isResultDisplayed = false;
 
 numbers.forEach(number => {
     number.addEventListener('click', () => {
+        if (isResultDisplayed) {
+            output.textContent = '';
+            isResultDisplayed = false;
+        }
         output.textContent += number.textContent
     });
 });
@@ -63,6 +68,7 @@ equals.addEventListener('click', () => {
         //displays the result
         output.textContent = result;
         showInput.textContent = '';
+        isResultDisplayed = true;
 
         //resets stored values
         numOne = null;
@@ -89,15 +95,24 @@ cubicRoot.addEventListener('click', () => {
 });
 
 percentage.addEventListener('click', () => {
-    if(output.textContent) {
+    if(output.textContent && numOne !== null) {
         const percentCalc = parseFloat(output.textContent);
-        result = (percentCalc / 100) * numOne;
+        let result;
+        
+        if (operator === '+') {
+            result = numOne + (percentCalc / 100) * numOne;
+            showInput.textContent = `${numOne} ${operator}`;
+        } else if (operator === '-') {
+            result = numOne - (percentCalc / 100) * numOne;
+            showInput.textContent = `${numOne} ${operator}`;
+        }
 
         output.textContent = result.toFixed(2);
-        showInput.textContent = `${numOne} ${operator} ${percentCalc}%`;
+        showInput.textContent = '';
+        isResultDisplayed = true;
         numOne = null;
     }
-})
+});
 
 //clears output and stored values
 clearInput.addEventListener('click', () => {
