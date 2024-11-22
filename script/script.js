@@ -42,6 +42,12 @@ operators.forEach(ope => {
 equals.addEventListener('click', () => {
     if (numOne !== null && operator && output.textContent) {
         const numTwo = parseFloat(output.textContent);
+
+        if (isNaN(numTwo)) {
+            output.textContent = 'Not a number';
+            return;
+        }
+
         let result;
         
         switch(operator) {
@@ -58,11 +64,14 @@ equals.addEventListener('click', () => {
                 break;
 
             case '/':
+                if (numTwo === 0) {
+                    output.textContent = 'Error';
+                    showInput.textContent = '';
+                    isResultDisplayed = true;
+                    return;
+                }
                 result = numOne / numTwo;
-                break;
-            case '%':
-                result = (numTwo / 100) * numOne + numOne;
-                break;    
+                break;   
         }
         
         //displays the result
